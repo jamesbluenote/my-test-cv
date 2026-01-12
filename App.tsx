@@ -9,6 +9,14 @@ import { cvData } from './data.ts';
 import { Award, Cpu, Globe, CheckCircle } from 'lucide-react';
 
 export default function App() {
+  if (!cvData) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">Loading CV data...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-[#1a1a1a] selection:bg-black selection:text-white">
       <Navbar />
