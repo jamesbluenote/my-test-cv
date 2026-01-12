@@ -3,10 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 
-function init() {
+function mount() {
+  console.log("Initializing Application...");
   const rootElement = document.getElementById('root');
+  
   if (!rootElement) {
-    console.error("Critical Error: Root element '#root' not found in document.");
+    console.error("Target container 'root' not found.");
     return;
   }
 
@@ -17,15 +19,15 @@ function init() {
         <App />
       </React.StrictMode>
     );
-    console.log("App mounted successfully.");
-  } catch (err) {
-    console.error("Fatal Error during React render:", err);
+    console.log("React Application mounted successfully.");
+  } catch (error) {
+    console.error("Rendering failed:", error);
+    rootElement.innerHTML = `<div style="padding: 20px; color: red;">Failed to load application. Please check the console for details.</div>`;
   }
 }
 
-// Ensure the DOM is fully loaded before trying to mount
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  mount();
 } else {
-  init();
+  window.addEventListener('DOMContentLoaded', mount);
 }
