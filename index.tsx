@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 
-const mountApp = () => {
+function init() {
   const rootElement = document.getElementById('root');
   if (!rootElement) {
-    console.error("Failed to find root element");
+    console.error("Critical Error: Root element '#root' not found in document.");
     return;
   }
 
@@ -17,13 +17,15 @@ const mountApp = () => {
         <App />
       </React.StrictMode>
     );
-  } catch (error) {
-    console.error("Error rendering React app:", error);
+    console.log("App mounted successfully.");
+  } catch (err) {
+    console.error("Fatal Error during React render:", err);
   }
-};
+}
 
+// Ensure the DOM is fully loaded before trying to mount
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', mountApp);
+  document.addEventListener('DOMContentLoaded', init);
 } else {
-  mountApp();
+  init();
 }
