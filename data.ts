@@ -1,5 +1,5 @@
 
-import { CVData } from './types';
+import { CVData } from './types.ts';
 
 export const cvData: CVData = {
   name: "Sung Jun Park",
